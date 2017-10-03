@@ -1,0 +1,24 @@
+<table border="1">
+    <tr>
+        <th align="center">href</th>
+        <th align="center">title</th>
+        <th align="center">price</th>
+        <th align="center">published_at</th>
+        <th align="center">urgent</th>
+        <th align="center">department</th>
+        <th align="center">city</th>
+        <th align="center">district</th>
+    </tr>
+    {{range .}}
+    <tr valign="top">
+        <td align="left"><a href="{{.Href}}">{{.Href}}</a></td>
+        <td align="left">{{.Title}}</td>
+        <td align="right">{{.Price}}</td>
+        <td align="left">{{.PublishedAt}}</td>
+        <td align="left">{{.Urgent}}</td>
+        <td align="left">{{.Department}}</td>
+        <td align="left">{{.City}}</td>
+        <td align="left">{{.District}}</td>
+    </tr>
+    {{end}}
+</table>

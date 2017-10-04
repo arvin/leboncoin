@@ -13,7 +13,7 @@
     <tr valign="top">
         <td align="left"><a href="{{.Href}}">{{.Href}}</a></td>
         <td align="left">{{.Title}}</td>
-        <td align="right">{{.Price}}</td>
+        <td align="right">{{if .Price}}{{.Price}}{{end}}</td>
         <td align="left">{{.PublishedAt}}</td>
         <td align="left">{{.Urgent}}</td>
         <td align="left">{{.Department}}</td>

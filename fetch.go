@@ -122,28 +122,33 @@ func parseTime(s string) (time.Time, error) {
 	var year, day, hour, minute int
 	var month time.Month
 
+	// TODO: handle case where the prefix is not "Aujourd'hui" not "Hier"
 	if strings.HasPrefix(s, "Aujourd'hui, ") {
+		// Aujourd'hui, 00:07
 		year, month, day = time.Now().In(paris).Date()
 		s = strings.TrimPrefix(s, "Aujourd'hui, ")
 
-		split := strings.Split(s, ":")
-		if len(split) != 2 {
-			return time.Time{}, fmt.Errorf("couldn't parse clock: %v", s)
-		}
-
-		var err error
-		hour, err = strconv.Atoi(split[0])
-		if err != nil {
-			return time.Time{}, err
-		}
-
-		minute, err = strconv.Atoi(split[1])
-		if err != nil {
-			return time.Time{}, err
-		}
+	} else if strings.HasPrefix(s, "Hier, ") {
+		// Hier, 23:45
+		year, month, day = time.Now().In(paris).AddDate(0, 0, -1).Date()
+		s = strings.TrimPrefix(s, "Hier, ")
 	}
 
-	// TODO: handle case where the prefix is not "Aujourd'hui"
+	split := strings.Split(s, ":")
+	if len(split) != 2 {
+		return time.Time{}, fmt.Errorf("couldn't parse clock: %v", s)
+	}
+
+	var err error
+	hour, err = strconv.Atoi(split[0])
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	minute, err = strconv.Atoi(split[1])
+	if err != nil {
+		return time.Time{}, err
+	}
 	return time.Date(year, month, day, hour, minute, 0, 0, paris), nil
 }
 

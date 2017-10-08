@@ -1,3 +1,23 @@
+<html>
+<form>
+    <select name="departments" multiple>
+        {{range .Departments}}
+        <option{{if contains $.Query.departments .}} selected{{end}}>{{.}}</option>
+        {{end}}
+    </select>
+    <select name="cities" multiple>
+        {{range .Cities}}
+        <option{{if contains $.Query.cities .}} selected{{end}}>{{.}}</option>
+        {{end}}
+    </select>
+    <select name="districts" multiple>
+        {{range .Districts}}
+        <option{{if contains $.Query.districts .}} selected{{end}}>{{.}}</option>
+        {{end}}
+    </select>
+    <button>Filter!</button>
+</form>
+
 <table border="1">
     <tr>
         <th align="center">href</th>
@@ -9,12 +29,12 @@
         <th align="center">city</th>
         <th align="center">district</th>
     </tr>
-    {{range .}}
+    {{range .Announces}}
     <tr valign="top">
         <td align="left"><a href="{{.Href}}">{{.Href}}</a></td>
         <td align="left">{{.Title}}</td>
         <td align="right">{{if .Price}}{{.Price}}{{end}}</td>
-        <td align="left">{{.PublishedAt}}</td>
+        <td align="left">{{.PublishedAt.Format "Mon, 02 Jan 2006 15:04"}}</td>
         <td align="left">{{.Urgent}}</td>
         <td align="left">{{.Department}}</td>
         <td align="left">{{.City}}</td>
@@ -22,3 +42,4 @@
     </tr>
     {{end}}
 </table>
+</html>

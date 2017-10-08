@@ -1,0 +1,1 @@
+select distinct(district) from announces where district != '';

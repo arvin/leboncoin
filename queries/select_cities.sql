@@ -1,0 +1,1 @@
+select distinct(city) from announces where city != '' order by city;
